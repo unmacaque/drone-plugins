@@ -1,0 +1,21 @@
+kind: pipeline
+type: docker
+name: build
+
+steps:
+  - name: build container-structure-test
+    image: plugins/docker
+    volumes:
+      - name: docker-sock
+        path: /var/run/docker.sock
+    settings:
+      repo: plugins/container-structure-test
+      tags: latest
+      context: container-structure-test
+      dockerfile: container-structure-test/Dockerfile
+      dry_run: true
+
+volumes:
+  - name: docker-sock
+    host:
+      path: /var/run/docker.sock
