@@ -1,5 +1,6 @@
 FROM alpine:3
 ARG VERSION=3.2.10
+ENV VERSION=${VERSION}
 RUN apk update && \
     apk add --no-cache coreutils python3 py3-elftools pacman && \
     apk add --no-cache --virtual .build-deps py3-pip python3-dev gcc musl-dev pacman-dev && \
