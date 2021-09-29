@@ -6,6 +6,10 @@ RUN apk update && \
     apk add --no-cache --virtual .build-deps py3-pip py3-pkgconfig py3-wheel python3-dev gcc musl-dev pacman-dev && \
     pip3 install pyalpm==${PYALPM_VERSION} && \
     pip3 install https://gitlab.archlinux.org/pacman/namcap/-/archive/${NAMCAP_VERSION}/namcap-${NAMCAP_VERSION}.tar.gz && \
-    apk del --no-network .build-deps
+    apk del --no-network .build-deps && \
+    mkdir -p /usr/share/namcap
+ADD https://gitlab.archlinux.org/pacman/namcap/-/raw/${NAMCAP_VERSION}/namcap-tags \
+    https://gitlab.archlinux.org/pacman/namcap/-/raw/${NAMCAP_VERSION}/parsepkgbuild.sh \
+    /usr/share/namcap/
 WORKDIR /mnt
 CMD [ "bash", "-c", "! grep '.' <(find . -name PKGBUILD | xargs -r -0 -n1 namcap 2>&1)" ]
