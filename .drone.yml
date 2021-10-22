@@ -1,9 +1,9 @@
 kind: pipeline
 type: docker
-name: build
+name: container-structure-test
 
 steps:
-  - name: build container-structure-test
+  - name: build
     image: plugins/docker
     volumes:
       - name: docker-sock
@@ -14,7 +14,19 @@ steps:
       context: container-structure-test
       dockerfile: container-structure-test/Dockerfile
       dry_run: true
-  - name: build namcap
+
+volumes:
+  - name: docker-sock
+    host:
+      path: /var/run/docker.sock
+
+---
+kind: pipeline
+type: docker
+name: namcap
+
+steps:
+  - name: build
     image: plugins/docker
     volumes:
       - name: docker-sock
