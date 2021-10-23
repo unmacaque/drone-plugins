@@ -1,3 +1,4 @@
+---
 kind: pipeline
 type: docker
 name: container-structure-test
@@ -13,6 +14,7 @@ steps:
       tags: latest
       context: container-structure-test
       dockerfile: container-structure-test/Dockerfile
+      pull_image: true
       dry_run: true
 
 volumes:
@@ -36,6 +38,7 @@ steps:
       tags: latest
       context: namcap
       dockerfile: namcap/Dockerfile
+      pull_image: true
       dry_run: true
 
 volumes:
