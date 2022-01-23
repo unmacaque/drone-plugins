@@ -11,5 +11,6 @@ RUN apk update && \
 ADD https://gitlab.archlinux.org/pacman/namcap/-/raw/${NAMCAP_VERSION}/namcap-tags \
     https://gitlab.archlinux.org/pacman/namcap/-/raw/${NAMCAP_VERSION}/parsepkgbuild.sh \
     /usr/share/namcap/
-WORKDIR /mnt
-CMD [ "bash", "-c", "! grep '.' <(find . -name PKGBUILD | xargs -r -0 -n1 namcap 2>&1)" ]
+COPY entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT [ "entrypoint.sh" ]
