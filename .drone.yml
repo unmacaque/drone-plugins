@@ -25,6 +25,30 @@ volumes:
 ---
 kind: pipeline
 type: docker
+name: markdownlint
+
+steps:
+  - name: build
+    image: plugins/docker
+    volumes:
+      - name: docker-sock
+        path: /var/run/docker.sock
+    settings:
+      repo: plugins/markdownlint
+      tags: latest
+      context: markdownlint
+      dockerfile: markdownlint/Dockerfile
+      pull_image: true
+      dry_run: true
+
+volumes:
+  - name: docker-sock
+    host:
+      path: /var/run/docker.sock
+
+---
+kind: pipeline
+type: docker
 name: namcap
 
 steps:
