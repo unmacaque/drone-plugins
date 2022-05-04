@@ -69,3 +69,27 @@ volumes:
   - name: docker-sock
     host:
       path: /var/run/docker.sock
+
+---
+kind: pipeline
+type: docker
+name: yamllint
+
+steps:
+  - name: build
+    image: plugins/docker
+    volumes:
+      - name: docker-sock
+        path: /var/run/docker.sock
+    settings:
+      repo: plugins/yamllint
+      tags: latest
+      context: yamllint
+      dockerfile: yamllint/Dockerfile
+      pull_image: true
+      dry_run: true
+
+volumes:
+  - name: docker-sock
+    host:
+      path: /var/run/docker.sock
