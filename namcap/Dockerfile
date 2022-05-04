@@ -1,5 +1,5 @@
 FROM alpine:3.15
-ARG PYALPM_VERSION=0.9.2
+ARG PYALPM_VERSION=0.10.6
 ARG NAMCAP_VERSION=3.2.10
 RUN apk update && \
     apk add --no-cache coreutils python3 py3-elftools pacman && \
